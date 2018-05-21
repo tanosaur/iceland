@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Palatino, 'Palatino Linotype', Georgia, serif;
+  color: white;
+  background-color: pink;
+}
+
+#mobile-signifier {
+  display: none;
+}
+
+
+h1 {
+  font-family: Palatino, 'Palatino Linotype', sans-serif;
+  font-weight: lighter;
+  font-style: italic;
+  opacity: 0;
+  text-align: center;
+}
+
+#title {
+  font-size: 7vw;
+  color: black;
+  -webkit-transition: opacity 4s;
+  -moz-transition: opacity 4s;
+  -o-transition: opacity 4s;
+  transition: opacity 4s;
+
+  padding-top: 1vh;
+}
+
+#desktop-signifier {
+  font-size: 6.5vw;
+  color: grey;
+
+  -webkit-transition: opacity 1.3s;
+  -moz-transition: opacity 1.3s;
+  -o-transition: opacity 1.3s;
+  transition: opacity 1.3s;
+}
+
+.fadein {
+  opacity: 1;
+}
+
+#count {
+  font-family: Palatino, 'Palatino Linotype', sans-serif;
+  font-weight: lighter;
+  text-align: center;
+  font-size: 2.5vh;
+  color: grey;
+  opacity: 1;
+  margin-top: 8.5vh;
+  margin-bottom: 2.5vh; /*shift page up*/
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  background: #FFF;
+}
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: fixed;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#title-container {
+  height: 10vh;
+  margin-bottom: 3.5vh;
+}
+
+.slide{
+  list-style: none;
+	position: absolute;
+	opacity: 0;
+	z-index: 1;
+
+	-webkit-transition: opacity 1.3s;
+	-moz-transition: opacity 1.3s;
+	-o-transition: opacity 1.3s;
+	transition: opacity 1.3s;
+}
+
+.showing {
+	opacity: 1;
+	z-index: 2;
+}
+
+.slide img{
+  width: 100vw;
+  cursor: pointer;
+}
+
+#slider {
+  width: 100vw;
+  height: 68.22vw;
+}
+
+
+@media (min-width:870px) { /* arbitrarily decided */
+
+html, body {
+  position: relative;
+}
+
+#container {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#title-container {
+  width: 180px;
+  margin-right: 105px;
+  height: 150px;
+  position: relative;
+  padding-top: 40px;
+}
+
+h1 {
+  font-size: 24px;
+  text-align: left;
+  padding: 0;
+}
+
+#count {
+  font-size: 12px;
+  position: absolute;
+  bottom: 0;
+  left: 60px;
+}
+
+#slider {
+  width: 55vw;
+  height: 37.52vw;
+  margin-bottom: 0;
+}
+
+.slide img{
+  width: 55vw;
+  cursor: pointer;
+}
+
+}
