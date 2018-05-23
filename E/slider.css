@@ -1,0 +1,26 @@
+.slide{
+  list-style: none;
+	position: absolute;
+	opacity: 0;
+	z-index: 1;
+
+	-webkit-transition: opacity 1.3s;
+	-moz-transition: opacity 1.3s;
+	-o-transition: opacity 1.3s;
+	transition: opacity 1.3s;
+}
+
+.showing {
+	opacity: 1;
+	z-index: 2;
+}
+
+.slide img{
+  width: 100vw;
+  cursor: pointer;
+}
+
+#slider {
+  width: 100vw;
+  height: 68.22vw;
+}

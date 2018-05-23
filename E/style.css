@@ -1,0 +1,62 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Palatino, 'Palatino Linotype', sans-serif;
+  font-weight: lighter;
+  font-style: italic;
+}
+
+/* Mobile */
+@media only screen
+  and (max-device-width: 480px) {
+
+#desktop-signifier {
+      display: none;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+}
+
+/* Mobile and portrait */
+@media only screen
+  and (max-device-width: 1280px)
+  and (orientation: portrait) {
+
+}
+
+/* Mobile and landscape */``
+@media only screen
+  and (max-device-width: 1280px)
+  and (orientation: landscape) {
+
+#title {
+  display: none;
+}
+
+#counter {
+  display: none;
+}
+
+#mobile-signifier {
+  display: none;
+}
+
+}
+
+/* Desktop */
+@media screen
+  and (min-device-width: 1280px) {
+
+#mobile-signifier {
+  display: none;
+}
+
+}
