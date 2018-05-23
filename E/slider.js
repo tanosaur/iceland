@@ -13,20 +13,29 @@ function _updateCounter() {
   document.getElementById("counter").innerHTML = count + "/" + total;
 }
 
+function _incrementIndex() {
+  _lastSlideIndex = _currentSlideIndex;
+  _currentSlideIndex = (_currentSlideIndex+1)%SLIDER.length;
+}
+
+function _decrementIndex() {
+  _lastSlideIndex = _currentSlideIndex;
+  _currentSlideIndex = (_currentSlideIndex+(SLIDER.length-1))%SLIDER.length;
+}
+
 function _emitIndexChange(){
   _shownewSlide();
   _updateCounter();
 }
 
 function next() {
-  _lastSlideIndex = _currentSlideIndex;
-  _currentSlideIndex = (_currentSlideIndex+1)%SLIDER.length;
+  _incrementIndex();
   _emitIndexChange();
+  setTitleBasedOnIndex(_currentSlideIndex);
 }
 
 function previous() {
-  _lastSlideIndex = _currentSlideIndex;
-  _currentSlideIndex = (_currentSlideIndex+(SLIDER.length-1))%SLIDER.length;
+  _decrementIndex();
   _emitIndexChange();
 }
 

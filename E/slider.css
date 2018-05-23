@@ -15,12 +15,6 @@
 	z-index: 2;
 }
 
-.slide img{
-  width: 100vw;
+.slide img {
   cursor: pointer;
-}
-
-#slider {
-  width: 100vw;
-  height: 68.22vw;
 }
