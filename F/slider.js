@@ -2,7 +2,7 @@ const SLIDER = document.querySelectorAll(".slide");
 let _currentSlideIndex = SLIDER.length-1;
 let _lastSlideIndex = 0;
 
-function _shownewSlide() {
+function _updateSlide() {
   SLIDER[_lastSlideIndex].className = "slide";
   SLIDER[_currentSlideIndex].className = "slide showing";
 }
@@ -11,6 +11,17 @@ function _updateCounter() {
   let count = (_currentSlideIndex+1).toString();
   let total = SLIDER.length.toString();
   document.getElementById("counter").innerHTML = count + "/" + total;
+}
+
+function _updateTitle() {
+  let title = document.getElementById("title");
+  if (index == SLIDER.length-2 && _currentSlideIndex > _lastSlideIndex) {
+    title.innerHTML = "I have looked in temples, churches and mosques...";
+  } else if (index == SLIDER.length-1 && _currentSlideIndex > _lastSlideIndex) {
+    title.innerHTML = "I have walked through rivers, valleys and streams...";
+  } else {
+    title.innerHTML = "Iceland: Textures &amp; Landscapes";
+  }
 }
 
 function _incrementIndex() {
@@ -24,14 +35,14 @@ function _decrementIndex() {
 }
 
 function _emitIndexChange(){
-  _shownewSlide();
+  _updateSlide();
   _updateCounter();
+  _updateTitle();
 }
 
 function next() {
-  _incrementIndex();
+   _incrementIndex();
   _emitIndexChange();
-  setTitleBasedOnIndex();
 }
 
 function previous() {
@@ -46,15 +57,16 @@ function previous() {
 })();
 
 (function enableKeying() {
-  document.addEventListener("keydown", nav, false);
-  function nav(e) {
+  document.onkeydown = function(e) {
     let key = e.keyCode || e.which;
+
     if (key === 39) {
       next();
-    } else if (key === 37) {
+    }
+    else if (key === 37) {
       previous();
     }
-  }
+  };
 })();
 
 (function enableSwiping() {
@@ -64,18 +76,18 @@ function previous() {
   var xDown = null;
   var yDown = null;
 
-  function handleTouchStart(e) {
-      xDown = e.touches[0].clientX;
-      yDown = e.touches[0].clientY;
+  function handleTouchStart(evt) {
+      xDown = evt.touches[0].clientX;
+      yDown = evt.touches[0].clientY;
   }
 
-  function handleTouchMove(e) {
+  function handleTouchMove(evt) {
       if ( ! xDown || ! yDown ) {
           return;
       }
 
-      var xUp = e.touches[0].clientX;
-      var yUp = e.touches[0].clientY;
+      var xUp = evt.touches[0].clientX;
+      var yUp = evt.touches[0].clientY;
 
       var xDiff = xDown - xUp;
       var yDiff = yDown - yUp;

@@ -3,56 +3,67 @@
 ## Contraints
 
 - Keep design same (how it looks and how it works; the UI/UX)
-- Optimise for 'cleanest code' - subject to debate, arguably most readable and level of specificity/generalisation is apt for its purpose
-- On mobile, there is one display for portrait and one for landscape. Swipe backwards/forwards to go through slider. In portrait, instructions hide after a few swipes.
-- On desktop, there is one display for narrower 'portrait' and one for wider screens 'landscape'. Click or arrow key to navigate slider. Instructions appear/disappear upon hover over slider.
+- Optimise for 'cleanest code' - subject to debate, arguably most readable and apt for its scale and purpose
+- On mobile, there is one display for portrait and one for landscape. Swipe backwards/forwards to go through slider. In portrait, instructions hide after a few swipes. [PIC]
+- On desktop, there is one display for narrower 'portrait' screens and one for wider 'landscape' screens. Click or arrow key to navigate slider. Title transitions to instructions upon hover over slider. [PIC][PIC]
 - At some point in future, would be cool to have a full-screen function for the slider.
-- Maybe one day, it'd be fun to have some kind of Easter egg-type, 'find something out about the author' thing.
+- Maybe one day, it'd be fun to have some kind of Easter egg-type, 'find something out about the author'-type thing.
+- Let's use vanilla HTML/CSS/JavaScript.
 
-## Extended constraints
+## Some background info
 
-- Got to appear on the web
-- Let's use HTML, CSS, Javascript (debate re using a web-building framework vs. hand-coded?)
-- DOM elements have to be listed in index.html and/or inserted by JS, at this point, a much-of-muchness
-- Would be ideal to have image files read dynamically rather than listing them out
+- Can read here for my UI/UX process
+- We use the term 'signifier' to mean the instruction that pops up indicating how to use the slider. It is from Don Norman's Design of Everyday Things. Technically, the counter is a signifier too, indicating to the user there is more than one image on the page; there is a slider.
 
-## How did I go?
+## Schema
 
-### A
+[Elements and actions]
+[Next and prev]
+[Mobile and desktop]
 
-- What it does (function.js), looks like (device.js) and how it handles resize (view.js) are abstracted. In each, there is a fork for mobile and landscape.
-- I look at this and can't help but wonder why I couldn't go with CSS media queries. This handles its initial display as well as display per resize event.
-- function.js is cute but not clean. It's readable to some extent - you can follow the code along well. However, some of its functions are not clearly. In particular, _hideMobileSignifierAfterSomeClicksOrSwipes(*counter*) is obscured at top level because it is embedded in _enableSwiping() and also in _enableClicking(). Without checking back at top-level code it would also be unclear as to why _hideMobileSignifierAfterSomeClicksOrSwipes(*counter*)  is in these two.
-- *currentSlide* and *counter* are kind of global variables, presumably because it was easier and/or made more sense to have another variable *counter* just to know when to hide the mobile signifier
-- There is explicit manipulation to the DOM elements. I suppose this is fine, there has to be some definite part that animates, moves the UI. 
+We could eliminate some of these by delegating to the DOM. The DOM could be: slider, title, mobile-signifier, desktop-signifier, counter. In this case, we wouldn't have to set separate signifiers. The DOM could also be: bounding-box-for-desktop, bounding-box-for-mobile, etc. This means we wouldn't have to restructure the DOM for a view in desktop. The specificity has to exist somewhere, therefore, this decision may be much of a muchness. Here, we have chosen to continue keeping the DOM as clutter-free as possible. This encourages manipulating the DOM via JS, which may prove simpler and more sustainable for future iterations.
 
-Immediate thoughts:
+## Proposal, 24 May
 
-- Would like to investigate/remember why CSS media queries did not seem a solution
-- A pub-sub model could work e.g. _hideMobileSignifierAfterSomeClicksOrSwipes(*counter*) subscribes to *counter*. Could it be too much infrastructure/overkill to recreate the whole site via pub-sub? That is, so that every UI element has a controller that responds to a signal to then determine how it is displayed ('Ah, full screen? Do this. Ah, mobile? Do this. Ah, 3rd to last slide? Do this.'). The wiring of such a model is just as explicit as explicit coding otherwise, maybe just more... decoupled?
+This proposed solution contains no explicit frameworks e.g. MVC, publish-subscribe, revealing module pattern. It does strive to follow an abstraction in the simplest way. The thought is that this code is then easily reviewed and structured into frameworks as necessary. 
 
-### B
+### Calls
 
-Doesn't fool me. Just A in more casing!
+To load files via server-side code or insert them explicitly?
 
-### C
+*Insert them explicitly* This refers to the image files for the slider. While having code dynamically look up and load files is a cool idea, KISS - I'm not likely to change my slider order or content much.
 
-Alas, it appears I tried the pub-sub model. 
+Writing a pub-sub type emitter or explicitly linking together functions?
 
-- I've a simple event emitter/subscriber function.
-- On load, the model is primed, which also updates the DOM. Also, the device and its orientation is 'emitted'. This then sets the display via a viewModelController. The viewModelController tells a viewModel which CSS file to use: 'MP.css' for mobile portrait, 'ML.css' for mobile landscape, 'DP.css' for desktop portrait, 'DL.css' for desktop landscape. 
-- Interesting, I am thinking I remember now that perhaps there was difficulty with CSS media queries in that they could change the display with size but then not also specifically by device, so for example, mobile portrait and desktop portrait would render the same. In my application, they're very different.
-- I think the code is incomplete but the approach worked. For full-screen, I suppose there would just be another event listener for full-screen that triggers an emit to the viewModelController for yet another CSS file. It wouldn't be explicit that the full-screen is only an option for desktop devices, though need it be? Unless the event listener was created somehow after/following/within the device trigger. Interesting to note _hideMobileSignifierAfterSomeClicksOrSwipes(*counter*) hasn't been implemented yet for this code. I suspect the same issue. Or, to clarify: relation between model and viewModel.
+*Insert them explicitly* We have a pseudo-emitter  in there for when the index changes. It then tells the relevant elements to change based on the index. I figure it's the same as any other type of emitter right now because there is no privacy/model structure to the code. Eventually, an emitter has to know where and how to link.
 
-My instinct is that A, B, C are little different. I am trying to say the same explicit things about how this software works, just in different disguises. C might look more general; the wiring tells the story. There may be some tangible benefit to C if the application begins to scale. However... I don't believe the application will scale. Famous last words, but at this point I don't see the addition of functions beyond full-screen and the potential Easter egg/about the author. So, YAGNI?
+To pass variables around or create global variables?
 
-I'm more interested in clarifying the relations between functions and display well, or in an even better way to put it, to tell the story of the build as accurately as possible via the code. So for example: "Let's change the display depending on whether it's mobile or desktop and portrait or landscape. There may be some shared functions across all displays, like clicking to change pictures, the changing of pictures. There are also some unique things, like on mobile if you swipe a couple times the instructions hide because I want more simplicity on the page. Maybe I'll add a full-screen function for desktop one day."
+*Hm* I already know the answer to this one. My response to this is - yes, we can get to it when we consider relevant frameworks. Taking a step back, I wonder what kind of security or good practice is needed for a program of this scale and purpose. Is it apt to have all out in the open, when no other programs are expected to interface? What does minimalism vs. good practice mean? You tell me.
 
-## Things that could be true
+To change views by CSS media queries or use alternate CSS files?
 
-- Investigate functional programming
-- Maybe I need to learn/redo bottom-up 'smart object'-style programming - last big exposure was the GUI I wrote for my thesis, so, long time ago and different application
+*CSS media queries for now* Here we've the approach of delegating as much as possible to CSS media queries and wherever we can't, we do via JS. I'm on the fence if this is a good approach. I'm influenced by someone and perhaps something I've read that using multiple CSS files is shameful. On the other hand, I see its benefits. The view change per device/orientation is explicit as read from the JS file. I've experimented by adding the desktop full-screen function, which can be initiated by pressing 'Enter' and closed by hitting 'Escape'. This is a view change that is inaccessible by CSS media queries because it is a user option on the same browser size. There are now CSS changes made via JS. If we were to add many other view changes, I propose it'd be cleaner and more consistent to create separate CSS files called in the JS. I'm uncertain whether it would perform adversely or be more error-prone. 
 
-## Reflecting on what is 'clean code' or the marker
+To use 'if' statements or not...
 
-Perhaps, as long as it is easy to read, easy to extend or change, and maintain, this is ideal. I do believe there are several near-ideal solutions that exist, optimising for least moving parts yet most flexible/extensible.
+*Yes, a few* An emitter was trialled so that 'if desktop or mobile' and 'if portrait or landscape' was removed. This simply passed the if statement on to another part of the code. 
+
+### Options, going forward
+
+#### Revealing module pattern or similar
+It'd be worth trying to abstract a slider and/or index object from other parts of the program.
+
+#### Functional programming approach
+We could write functions within an object, call a method to perform a method on all methods in object. Potentially perform the same operations on a mobile object and desktop object. I can see a very streamlined build this way especially if the view is written as separate CSS files than in media queries. On the other hand, it could just be some organisational sugar. I'd like to try organising the code in a different way anyway. I've an interest in learning functional programming approaches.
+
+## Alternatives
+
+### MVC
+
+### Other wild styles
+
+## Personal reflection
+
+Feel free to go ahead read my two reflections this week.
+

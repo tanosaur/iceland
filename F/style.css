@@ -66,26 +66,8 @@ body {
 
 /* Desktop and portrait */
 @media screen
-  and (min-device-width: 1280px)
-  and (max-width: 919px) {
+  and (min-device-width: 1280px) {
 
-#container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 0 10vh;
-}
-
-#slider {
-  width: 100vw;
-  height: 68.22vw;
-}
-
-.slide img {
-  width: 100vw;
-}
 
 }
 
@@ -100,7 +82,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 0;
   }
 
   #slider {
