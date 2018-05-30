@@ -12,7 +12,7 @@
 
 ## Some background info
 
-- Can read here for my UI/UX process
+- Can [read here](https://medium.com/@tanosaur/building-iceland-textures-landscapes-22acbea767ec) for my UI/UX process
 - We use the term 'signifier' to mean the instruction that pops up indicating how to use the slider. It is from Don Norman's Design of Everyday Things. Technically, the counter is a signifier too, indicating to the user there is more than one image on the page; there is a slider.
 
 ## Schema
@@ -29,25 +29,25 @@ This proposed solution contains no explicit frameworks e.g. MVC, publish-subscri
 
 ### Calls
 
-To load files via server-side code or insert them explicitly?
+**To load files via server-side code or insert them explicitly?**
 
-*Insert them explicitly* This refers to the image files for the slider. While having code dynamically look up and load files is a cool idea, KISS - I'm not likely to change my slider order or content much.
+*Insert them explicitly*. This refers to the image files for the slider. While having code dynamically look up and load files is a cool idea, KISS - I'm not likely to change my slider order or content much.
 
-Writing a pub-sub type emitter or explicitly linking together functions?
+**Writing a pub-sub type emitter or explicitly linking together functions?**
 
-*Insert them explicitly* We have a pseudo-emitter  in there for when the index changes. It then tells the relevant elements to change based on the index. I figure it's the same as any other type of emitter right now because there is no privacy/model structure to the code. Eventually, an emitter has to know where and how to link.
+*Insert them explicitly*. We have a pseudo-emitter  in there for when the index changes. It then tells the relevant elements to change based on the index. I figure it's the same as any other type of emitter right now because there is no privacy/model structure to the code. Eventually, an emitter has to know where and how to link.
 
-To pass variables around or create global variables?
+**To pass variables around or create global variables?**
 
-*Hm* I already know the answer to this one. My response to this is - yes, we can get to it when we consider relevant frameworks. Taking a step back, I wonder what kind of security or good practice is needed for a program of this scale and purpose. Is it apt to have all out in the open, when no other programs are expected to interface? What does minimalism vs. good practice mean? You tell me.
+*Hm*. I already know the answer to this one. My response to this is - yes, we can get to it when we consider relevant frameworks. Taking a step back, I wonder what kind of security or good practice is needed for a program of this scale and purpose. Is it apt to have all out in the open, when no other programs are expected to interface? What does minimalism vs. good practice mean? You tell me.
 
 To change views by CSS media queries or use alternate CSS files?
 
-*CSS media queries for now* Here we've the approach of delegating as much as possible to CSS media queries and wherever we can't, we do via JS. I'm on the fence if this is a good approach. I'm influenced by someone and perhaps something I've read that using multiple CSS files is shameful. On the other hand, I see its benefits. The view change per device/orientation is explicit as read from the JS file. I've experimented by adding the desktop full-screen function, which can be initiated by pressing 'Enter' and closed by hitting 'Escape'. This is a view change that is inaccessible by CSS media queries because it is a user option on the same browser size. There are now CSS changes made via JS. If we were to add many other view changes, I propose it'd be cleaner and more consistent to create separate CSS files called in the JS. I'm uncertain whether it would perform adversely or be more error-prone. 
+*CSS media queries for now*. Here we've the approach of delegating as much as possible to CSS media queries and wherever we can't, we do via JS. I'm on the fence if this is a good approach. I'm influenced by someone and perhaps something I've read that using multiple CSS files is shameful. On the other hand, I see its benefits. The view change per device/orientation is explicit as read from the JS file. I've experimented by adding the desktop full-screen function, which can be initiated by pressing 'Enter' and closed by hitting 'Escape'. This is a view change that is inaccessible by CSS media queries because it is a user option on the same browser size. There are now CSS changes made via JS. If we were to add many other view changes, I propose it'd be cleaner and more consistent to create separate CSS files called in the JS. I'm uncertain whether it would perform adversely or be more error-prone. 
 
 To use 'if' statements or not...
 
-*Yes, a few* An emitter was trialled so that 'if desktop or mobile' and 'if portrait or landscape' was removed. This simply passed the if statement on to another part of the code. 
+*Yes, a few*. An emitter was trialled so that 'if desktop or mobile' and 'if portrait or landscape' was removed. This simply passed the if statement on to another part of the code. 
 
 ### Options, going forward
 
@@ -65,5 +65,5 @@ We could write functions within an object, call a method to perform a method on 
 
 ## Personal reflection
 
-Feel free to go ahead read my two reflections this week.
+Feel free to go ahead [read my two reflections](https://github.com/tanosaur/iceland/blob/master/reflections.md) this week.
 
