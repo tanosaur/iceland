@@ -41,11 +41,11 @@ This proposed solution contains no explicit frameworks e.g. MVC, publish-subscri
 
 *Hm*. I already know the answer to this one. My response to this is - yes, we can get to it when we consider relevant frameworks. Taking a step back, I wonder what kind of security or good practice is needed for a program of this scale and purpose. Is it apt to have all out in the open, when no other programs are expected to interface? What does minimalism vs. good practice mean? You tell me.
 
-To change views by CSS media queries or use alternate CSS files?
+**To change views by CSS media queries or use alternate CSS files?**
 
 *CSS media queries for now*. Here we've the approach of delegating as much as possible to CSS media queries and wherever we can't, we do via JS. I'm on the fence if this is a good approach. I'm influenced by someone and perhaps something I've read that using multiple CSS files is shameful. On the other hand, I see its benefits. The view change per device/orientation is explicit as read from the JS file. I've experimented by adding the desktop full-screen function, which can be initiated by pressing 'Enter' and closed by hitting 'Escape'. This is a view change that is inaccessible by CSS media queries because it is a user option on the same browser size. There are now CSS changes made via JS. If we were to add many other view changes, I propose it'd be cleaner and more consistent to create separate CSS files called in the JS. I'm uncertain whether it would perform adversely or be more error-prone. 
 
-To use 'if' statements or not...
+**To use 'if' statements or not...**
 
 *Yes, a few*. An emitter was trialled so that 'if desktop or mobile' and 'if portrait or landscape' was removed. This simply passed the if statement on to another part of the code. 
 
