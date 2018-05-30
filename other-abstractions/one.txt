@@ -1,0 +1,17 @@
+
+slider = {index, [slides]}
+
+next -> increments index
+previous -> decrements index
+
+title, counter, signifier, slider = {content, display} -> HTML/CSS
+
+display = {
+onIndex
+onUI
+onDeviceAndOrientation
+}
+
+regular M,D
+D - hide on hover
+last two indexes - change if forward
