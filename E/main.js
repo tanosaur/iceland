@@ -1,12 +1,3 @@
-// const MOBILE = {
-//   signifier: "Click or swipe left/right<br>Rotate to enlarge",
-//
-// };
-//
-// const DESKTOP = {
-//   signifier: "Click or arrow key to next",
-// };
-
 function mobile() {
   (function _setSignifier() {
     document.getElementById("signifier").innerHTML = "Swipe left/right<br>Rotate to enlarge";
