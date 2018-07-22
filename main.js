@@ -1,4 +1,5 @@
 let container = document.getElementById("container");
+let signifier = document.getElementById("signifier");
 let leftBox = document.getElementById("left-box");
 let slider = document.getElementById("slider");
 let counter = document.getElementById("counter");
@@ -54,6 +55,7 @@ function mobile() {
   (function _structureDOM() {
     container.appendChild(counter);
     container.insertBefore(slider, counter);
+    document.body.appendChild(signifier);
   })();
 
 }

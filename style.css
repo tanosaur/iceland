@@ -21,6 +21,16 @@ body {
   font-style: italic;
 }
 
+/* All mobile/tablet */
+@media only screen
+  and (max-device-width: 1080px) {
+
+  body {
+    overflow: hidden;
+  }
+
+}
+
 /* Mobile/tablet and portrait */
 @media only screen
   and (max-device-width: 1080px)
@@ -72,7 +82,9 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 73vh;
-    margin-top: 16vh;
+    position: fixed;
+    left: 0;
+    top: 16vh;
     width: 100vw;
   }
 
@@ -96,7 +108,9 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 62vh;
-    margin-top: 20.5vh;
+    position: fixed;
+    top: 20.5vh;
+    left: 0;
     width: 100vw;
   }
 
@@ -110,6 +124,7 @@ body {
 
   #container {
     position: fixed;
+    top: 0;
     display: block;
     margin: auto;
   }
@@ -143,6 +158,7 @@ body {
     justify-content: center;
     margin: 0;
     height: 100vh;
+    top: 0;
   }
 
   #title, #counter, #signifier {
