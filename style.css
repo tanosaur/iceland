@@ -1,0 +1,276 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Palatino, 'Palatino Linotype', sans-serif;
+  font-weight: lighter;
+  background: #FFF;
+}
+
+.fadein {
+  opacity: 1;
+}
+
+#signifier, #counter {
+  color: grey;
+}
+
+#title {
+  font-style: italic;
+}
+
+/* Mobile/tablet and portrait */
+@media only screen
+  and (max-device-width: 1080px)
+  and (orientation: portrait) {
+
+  #title {
+    height: 1vh;
+    padding: 0 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #slider {
+    width: 100vw;
+    height: 68.22vw;
+  }
+
+  .slide img {
+    width: 100%;
+  }
+
+  #signifier {
+    position: absolute;
+    top: 5.8vh;
+    left: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+}
+
+/* Tablet and portrait */
+@media only screen
+  and (max-device-width: 1080px) {
+
+  #title {
+    font-size: calc(2.1vw + 2.2vh);
+  }
+
+  #signifier, #counter {
+    font-size: calc(0.6vw + 1.3vh);
+  }
+
+  #container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 73vh;
+    margin-top: 16vh;
+    width: 100vw;
+  }
+
+}
+
+/* Mobile and portrait */
+@media only screen
+  and (max-device-width: 500px) {
+
+  #title {
+    font-size: calc(2.45vw + 2.3vh);
+  }
+
+  #signifier, #counter {
+    font-size: calc(0.6vw + 1.5vh);
+  }
+
+  #container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 62vh;
+    margin-top: 20.5vh;
+    width: 100vw;
+  }
+
+}
+
+/* Mobile and landscape */
+@media only screen
+  and (max-device-width: 1080px)
+  and (orientation: landscape)
+  and (min-aspect-ratio: 3/2) {
+
+  #container {
+    position: fixed;
+    display: block;
+    margin: auto;
+  }
+
+  #title, #counter, #signifier {
+    display: none;
+  }
+
+  #slider {
+    height:  100vh;
+    width: 146.9vh;
+    margin: auto;
+  }
+
+  .slide img {
+    height: 100vh;
+    width: 146.9vh;
+  }
+
+}
+
+/* Tablet and landscape */
+@media only screen
+  and (max-device-width: 1080px)
+  and (orientation: landscape)
+  and (max-aspect-ratio: 3/2) {
+
+  #container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100vh;
+  }
+
+  #title, #counter, #signifier {
+    display: none;
+  }
+
+  #slider {
+    height:  68.04vw;
+    width: 100vw;
+    margin: auto;
+  }
+
+  .slide img {
+    width: 100vw;
+  }
+
+}
+
+/* Desktop */
+@media screen
+  and (min-device-width: 1280px) {
+
+#signifier {
+  opacity: 0;
+  -webkit-transition: opacity 1.3s;
+  -moz-transition: opacity 1.3s;
+  -o-transition: opacity 1.3s;
+  transition: opacity 1.3s;
+  color: grey;
+}
+
+#title, #signifier {
+  font-size: 25.5px;
+  font-style: italic;
+}
+
+#counter {
+  font-size: 12.3px;
+}
+
+/* Desktop and portrait */
+@media screen
+  and (min-device-width: 1280px)
+  and (max-width: 750px) {
+
+  #container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 98vh;
+    padding-top: 2vh;
+    margin: 0 3vw;
+  }
+
+  #slider {
+    width: 100vw;
+    height: 68.22vw;
+  }
+
+  #left-box {
+    height: calc(49vh - 34.11vw);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  #counter {
+    height: calc(49vh - 34.11vw);
+    display: flex;
+    align-items: center;
+  }
+
+  .slide img {
+    width: 100vw;
+  }
+
+  #title {
+    width: 100vw;
+    text-align: center;
+  }
+
+}
+
+/* Desktop and landscape */
+@media screen
+  and (min-device-width: 1280px)
+  and (min-width: 750px) {
+
+  #container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #slider {
+    width: 55vw;
+    height: 37.52vw;
+  }
+
+  .slide img{
+    width: 55vw;
+  }
+
+  #left-box {
+    width: 185px;
+    height: 26vh;
+    min-height: 150px;
+    max-height: 200px;
+    position: relative;
+    margin-right: 7vw;
+    margin-bottom: 8vh;
+    display: flex;
+    align-items: center;
+  }
+
+  #signifier {
+    height: 6vh;
+  }
+
+  #counter {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 83%;
+  }
+
+}
